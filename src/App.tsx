@@ -1,36 +1,37 @@
-
+import { useState } from 'react';
 import logo from './img/logo.png';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import All from './All';
+import AllCharacters from './All';
 import Favorites from './Favorites';
-import { ThemeContext, favorites } from './contexts/contexts';
-import { QueryClient, QueryClientProvider } from "react-query";
+import Search from './Search';
+
 
 const App = () => {
-  const queryClient = new QueryClient();
+  // const queryClient = new QueryClient();
+  const [search, setSearch] = useState('');
+  
+  const getData = (searchInfo:string) => {
+    setSearch(searchInfo)
+  }
+  console.log(search);
   return (
     <div className="App">
       <Router>
-      <header className="App-header">
-
-        
-        
-            <Link to="/">
-              <img src={logo} className="App-logo" alt="Link to main page of app" />
-            </Link>
-            <Link to="/favorites" >
-                My Favorites
-            </Link>
-        
-      </header>
-      <main>
+        <header className="App-header container mx-auto px-4 py-10">
+          <Link to="/">
+            <img src={logo} className="App-logo" alt="Link to main page of app" />
+          </Link>
+          <Search getData={getData}/>
+          <Link to="/favorites" >
+              My Favorites
+          </Link>
+        </header>
+        <main>
       
         <Switch>
           <Route exact path="/">
-            <QueryClientProvider client={queryClient}>
-              <All/>
-            </QueryClientProvider>
+              <AllCharacters search ={search}/>
           </Route>
           <Route path="/favorites">
             <Favorites/>  

@@ -23,6 +23,12 @@ module.exports = {
       },
       cursor: {
         'disabled': 'not-allowed',
+      },
+      placeholderColor: {
+        'searchbar': '#CBCED2'
+      },
+      padding: {
+        'searchbar': '0.5rem 5.6rem 0.5rem 1.3rem',
       }
     },
   },

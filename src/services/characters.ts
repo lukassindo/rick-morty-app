@@ -1,66 +1,56 @@
-import { Characters, Data, AllData } from "../models/models";
+import { Characters, Data, RickAndMortyPayload } from "../models/models";
 
-const getCharacters = async (urls: string[], favorites: boolean): Promise<Characters> => {
+const getFavorites = async (urls: string[]): Promise<RickAndMortyPayload> => {
+    let results: Characters = [];
     let allData = await Promise.all(urls.map(el =>{
         return fetch(el)
-        .then((response)=>response.json()) 
+        .then((response)=>response.json());
     }));
-    let charData: Characters = []
     allData = allData.map((item) => {
-        if (favorites) {
-            charData.push(item);
-        } else {
-            item.results.forEach((el:Data) => {
-                charData.push(el);
-            })
-        }
+        results.push(item);  
     });
-   
-  
-    let episodes: string[] = [];
-    charData.forEach((el: Data) => {
-        let ep: string = el.episode[0];
-        episodes.push(ep)
-    });
-
-    let episodesData  = await Promise.all(episodes.map(el =>{
-        return fetch(el)
-        .then((response)=>response.json()) 
-    }));
-      
-    charData.map((item: Data, index) => {
-        item.episode = episodesData[index].name;
-        return item
-    });
-    return charData;
+    return getFinalData(results);
 }
 
-const getChar = async (page = 1) => {
-    const response = await fetch(
-    `https://rickandmortyapi.com/api/character?page=${page}`
-    )
-    let allData = await response.json();
-    let results: Characters = allData.results;
+const getCharacters = async (page: number[], filters?: string): Promise<RickAndMortyPayload> => {
+    let url = `https://rickandmortyapi.com/api/character/`;
+    let results: Characters = []; 
+    if(filters) {
+        url += `?name=${filters.toLowerCase()}`;
+    } else {
+        url += `${page}`;
+    }
+    const response = await fetch(url);
+    let result = await response.json();
+    if(response.status !== 200) return { results: [], errorMessage: "Pick proper name"};
+    if(filters) {
+        results = result.results;
+    } else {
+        results = result;
+    }
+    return getFinalData(results);
+}
 
+
+const getFinalData = async (results: Data[]) : Promise<RickAndMortyPayload> => {
     let episodes: string[] = [];
     results.forEach((el: Data) => {
         let ep: string = el.episode[0];
-        episodes.push(ep)
+        episodes.push(ep);
     });
 
-    let episodesData  = await Promise.all(episodes.map(el =>{
+    let episodesData  = await Promise.all(episodes.map(el => {
         return fetch(el)
-        .then((response)=>response.json()) 
+        .then((response)=>response.json()) ;
     }));
-
-
+      
     results.map((item: Data, index) => {
         item.episode = episodesData[index].name;
-        return item
+        item.disabled = false;
+        return item;
     });
-    
-    console.log(results)
-    return results;
+
+    return {results, errorMessage: ""};
 }
 
-export {getCharacters, getChar};
+export  {getCharacters, getFavorites};

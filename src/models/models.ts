@@ -1,11 +1,5 @@
-
-type AllData = [{
-    info: {},
-    results: {}
-}];
-
 type Characters = Data[];
-   
+
 type Data = {
     created?: string,
     episode : string[] | string,
@@ -21,10 +15,38 @@ type Data = {
     type?: string,
     url: string,
     status: string,
-
+    disabled?: boolean,
 }
 
+type CardProps = {
+    all: boolean,
+    index: number,
+    data: Data,
+    addFavorite: (event: React.MouseEvent<HTMLButtonElement>, name: string, url: string) => void;
+    removeFavorite: (event: React.MouseEvent<HTMLButtonElement>, name: string) => void;
+}
 
+type SearchProps = {
+    getData: (searchInfo: string) => void;
+}
 
-export type {Data, Characters, AllData}
+type AllCards = {
+    search: string,
+}
+
+type PaginationComponent = {
+    page: number[], 
+    count: number,
+    goToPage: ( numbers:number[]) => void;
+}
+type RickAndMortyPayload = {
+    results: Characters,
+    errorMessage?: string,
+}
+
+type CharacterFilter = {
+    name: string;
+}
+
+export type {Data, Characters, CardProps, PaginationComponent, RickAndMortyPayload, CharacterFilter, SearchProps, AllCards}
 

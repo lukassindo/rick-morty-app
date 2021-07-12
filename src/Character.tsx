@@ -1,27 +1,6 @@
-import React, {useEffect, useState} from 'react';
-import { Characters, Data} from './models/models';
-
-
-type CardProps = {
-    all: boolean,
-    index: number,
-    data: Data,
-    addFavorite: (event: React.MouseEvent<HTMLButtonElement>, name: string, url: string) => void;
-    removeFavorite: (event: React.MouseEvent<HTMLButtonElement>, name: string) => void;
-}
-
-
+import { CardProps} from './models/models';
 
 const Character = ({data, index, addFavorite, removeFavorite, all} :CardProps) => {
-    const [disabled, setDisabled] = useState<boolean>(false);
-
-    useEffect(()=> {
-        let names: string[] = Object.keys(localStorage);
-        console.log(names);
-        names.forEach(name=> {
-            (name === data.name) && setDisabled(true); 
-        })
-    },[]);
 
     return (
         <div className="charBox h-box bg-primary text-white flex rounded-lg overflow-hidden m-center" key={index}>
@@ -40,7 +19,7 @@ const Character = ({data, index, addFavorite, removeFavorite, all} :CardProps) =
                     <p className="text-sm">{data.episode}</p>
                 </div>
                 {(all) ?
-                    <button disabled={disabled} onClick= {(e) => addFavorite(e, data.name, data.url)} className="text-sm w-48 bg-transparent py-1 border-2 border-white disabled:bg-disabled disabled:cursor-disabled ">Add to Favorites</button>
+                    <button disabled={(data.disabled) && true} onClick= {(e) => addFavorite(e, data.name, data.url)} className="text-sm w-48 bg-transparent py-1 border-2 border-white disabled:bg-disabled disabled:cursor-disabled ">Add to Favorites</button>
                     :
                     <button onClick= {(e) => removeFavorite(e, data.name)} className="text-sm w-48 bg-transparent py-1 border-2 border-white">Remove from Favorites</button>
                 }
@@ -48,7 +27,5 @@ const Character = ({data, index, addFavorite, removeFavorite, all} :CardProps) =
         </div>
     )
 }
-
-
 
 export default Character;
