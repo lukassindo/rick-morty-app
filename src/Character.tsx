@@ -11,17 +11,17 @@ const Character = ({data, index, addFavorite, removeFavorite, all} :CardProps) =
                 <h2 className="text-xl leading-5">{data.name}</h2>
                 <p className="text-sm">{`${data.status} - ${data.species}`}</p>
                 <div>
-                    <span className="block text-xs">Last known location</span>
+                    <span className="block text-xs font-light text-secondary">Last known location</span>
                     <p className="text-sm">{data.location.name}</p>
                 </div>
                 <div>
-                    <span className="block text-xs">First seen in</span>
+                    <span className="block text-xs font-light text-secondary">First seen in</span>
                     <p className="text-sm">{data.episode}</p>
                 </div>
                 {(all) ?
-                    <button disabled={(data.disabled) && true} onClick= {(e) => addFavorite(e, data.name, data.url)} className="text-sm w-48 bg-transparent py-1 border-2 border-white disabled:bg-disabled disabled:cursor-disabled ">Add to Favorites</button>
+                    <button disabled={(data.disabled)} onClick= {() => addFavorite(data.name, data.url)} className="text-sm w-48 bg-transparent py-1 border-2 border-white disabled:bg-disabled disabled:cursor-disabled ">Add to Favorites</button>
                     :
-                    <button onClick= {(e) => removeFavorite(e, data.name)} className="text-sm w-48 bg-transparent py-1 border-2 border-white">Remove from Favorites</button>
+                    <button onClick= {(e) => removeFavorite(data.name)} className="text-sm w-48 bg-transparent py-1 border-2 border-white">Remove from Favorites</button>
                 }
             </div>
         </div>

@@ -20,15 +20,14 @@ const Pagination = ({page, count, goToPage}: PaginationComponent) => {
         }
     },[])  
    
-    
     return (
         <>
          {(pagesArray.length > 1) &&
             pagesArray.map((arr, index) => {
                 if(JSON.stringify(arr) === JSON.stringify(page) && (index >= 0 && index < 3) ) {
                     return (
-                        <ul key={index} className="pagination">
-                        <li className="active"  style={{color: '#11B0C8'}} onClick={() => goToPage(arr)}>{index+1}</li>
+                        <ul key={index} className="pagination text-white flex justify-center">
+                        <li className="active text-active" onClick={() => goToPage(arr)}>{index+1}</li>
                         <li onClick={() => goToPage(pagesArray[index+1])}>{index+2}</li>
                         <li onClick={() => goToPage( pagesArray[index+2])}>{index+3}</li>
                         <li>...</li>
@@ -38,10 +37,10 @@ const Pagination = ({page, count, goToPage}: PaginationComponent) => {
                 }
                 else if(JSON.stringify(arr) === JSON.stringify(page) && (index >= 3 && index < pagesArray.length-3)) {
                     return (
-                        <ul key={index} className="pagination">
+                        <ul key={index} className="pagination text-white flex justify-center">
                         <li onClick={() => goToPage(pagesArray[0])}>1</li>
                         <li>...</li>
-                        <li className="active" style={{color: '#11B0C8'}} onClick={() => goToPage(arr)}>{index+1}</li> 
+                        <li className="active text-active" onClick={() => goToPage(arr)}>{index+1}</li> 
                         <li onClick={() => goToPage(pagesArray[index+1])}>{index+2}</li>
                         <li onClick={() => goToPage(pagesArray[index+2])}>{index+3}</li>
                         <li>...</li>
@@ -50,10 +49,10 @@ const Pagination = ({page, count, goToPage}: PaginationComponent) => {
                     )
                 } else if (JSON.stringify(arr) === JSON.stringify(page) && (index >= pagesArray.length-3 && index <= pagesArray.length-1)) {
                     return (
-                        <ul key={index} className="pagination">
+                        <ul key={index} className="pagination text-white flex justify-center">
                         <li onClick={() => goToPage(pagesArray[0])}>1</li>
                         <li>...</li>
-                        <li className="active" style={{color: '#11B0C8'}} onClick={() => goToPage(arr)}>{index+1}</li> 
+                        <li className="active text-active" onClick={() => goToPage(arr)}>{index+1}</li> 
                         </ul>
                     )
                 }

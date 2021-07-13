@@ -1,23 +1,24 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {getCharacters} from './services/characters';
 import Character from './Character';
 import './App.css';
 import Pagination from './Pagination';
-import { Characters, AllCards } from './models/models';
+import { Characters, Searches } from './models/models';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
-const AllCharacters = ({search}: AllCards) => {
+library.add(faArrowLeft, faArrowRight );
+
+const AllCharacters = ({search, clear = false}: Searches) => {
     const [page, setPage] = useState<number[]>([1,2,3,4,5,6]);
     const [count, setCount] = useState<number>(0);
     const [characters, setCharacters] = useState<Characters>([]);
+    const [added, setAdded] = useState<boolean>(false);
+    const [firstPage, setFirstPage] = useState<boolean>(false);
+    const [error, setError] = useState<string>('');
 
     useEffect(()=> {
-        let names: string[] = Object.keys(localStorage);
-        
-        characters.forEach((el, index) => {
-            let match = names.find(item=> item === el.name);
-            if (match !== undefined) characters[index].disabled = true;
-        })
-        
         const Count =  async() => {
           const data = await fetch("https://rickandmortyapi.com/api/character");
           const result = await data.json();
@@ -28,16 +29,31 @@ const AllCharacters = ({search}: AllCards) => {
     },[]);
 
     useMemo(() => {
+      if(firstPage)
+      setPage([1,2,3,4,5,6])
+    },[clear]);
+
+    useEffect(() => {
       const getChar = async() => {
         const data = await getCharacters(page, search);
+        if(data.errorMessage)  {
+          setError(data.errorMessage)
+        } else {setError('')}
         const results = data.results;
         setCharacters(results);
       } 
       getChar();
     },[page, search]);
 
-    console.log(search);
-    console.log(characters);
+    useMemo(() => {
+      let urls: string[] = Object.values(localStorage);
+        characters.forEach((el, index) => {
+            let match = urls.find(item=> item === el.url);
+            if (match !== undefined) characters[index].disabled = true;
+        })
+        setFirstPage(true)
+    },[characters, added]);
+
     const prevPage = () => {
         if (JSON.stringify(page) !== JSON.stringify([1,2,3,4,5,6])) {
           let newPage: number[] = [];
@@ -64,20 +80,20 @@ const AllCharacters = ({search}: AllCards) => {
         setPage(numbers);
     }
         
-    const AddFavorite = (event: React.MouseEvent<HTMLButtonElement>, name: string, url: string) => {
+    const AddFavorite = (name: string, url: string) => {
         localStorage.setItem(name, url);
-        let target = event.target as HTMLButtonElement;
-        target.disabled = true;
-
+        setAdded(!added);
     }
 
-    const removeFavorites = (event: React.MouseEvent<HTMLButtonElement>, name: string) => {}
+    const removeFavorites = (name: string) => {}
 
     const loading = (<p className="loading text-white font-extrabold animate-pulse">Loading...</p>);
-
+    
+    const errorMsg = (<p className="loading text-white font-extrabold animate-pulse">{error}</p>)
+    
     const persons = (
       <>
-        <div className="all container mx-auto px-4 grid grid-cols-3 gap-4">
+        <div className="all container mx-auto min-h-main grid lg:grid-cols-2 xl:grid-cols-3 gap-4 pb-10 border-primary border-b-2">
         {characters.map((character, index)=> (
           <div key={index}>
             <Character all={true} index={index} data ={character} addFavorite={AddFavorite} removeFavorite={removeFavorites}/>
@@ -86,13 +102,15 @@ const AllCharacters = ({search}: AllCards) => {
         </div>
           
         {(!search) && 
-          <div>
-            <button onClick={prevPage}>
+          <div className="pagination-container container flex justify-between mx-auto pt-4 pb-12">
+            <button className="text-white font-bold" onClick={prevPage}>
+              <FontAwesomeIcon icon="arrow-left" className="mr-2 text-sm relative bottom-0.5"/>
               Previous
           </button>
             {(count > 0) && <Pagination page = {page} count={count} goToPage={goToPage}/>}
-          <button onClick={nextPage}>
+          <button className="text-white font-bold" onClick={nextPage}>
               Next
+              <FontAwesomeIcon icon="arrow-right" className="ml-2 text-sm relative bottom-0.5"/>
             </button>
         </div>
         }  
@@ -102,6 +120,7 @@ const AllCharacters = ({search}: AllCards) => {
     return (
       <>
       {(characters) ? persons : loading}
+      {(error) && errorMsg}
       </>
     )
     

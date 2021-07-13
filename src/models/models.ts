@@ -22,16 +22,17 @@ type CardProps = {
     all: boolean,
     index: number,
     data: Data,
-    addFavorite: (event: React.MouseEvent<HTMLButtonElement>, name: string, url: string) => void;
-    removeFavorite: (event: React.MouseEvent<HTMLButtonElement>, name: string) => void;
+    addFavorite: (name: string, url: string) => void;
+    removeFavorite: (name: string) => void;
 }
 
 type SearchProps = {
     getData: (searchInfo: string) => void;
 }
 
-type AllCards = {
+type Searches = {
     search: string,
+    clear: boolean,
 }
 
 type PaginationComponent = {
@@ -39,14 +40,11 @@ type PaginationComponent = {
     count: number,
     goToPage: ( numbers:number[]) => void;
 }
+
 type RickAndMortyPayload = {
     results: Characters,
     errorMessage?: string,
 }
 
-type CharacterFilter = {
-    name: string;
-}
-
-export type {Data, Characters, CardProps, PaginationComponent, RickAndMortyPayload, CharacterFilter, SearchProps, AllCards}
+export type {Data, Characters, CardProps, PaginationComponent, RickAndMortyPayload, SearchProps, Searches}
 

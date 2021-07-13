@@ -31,7 +31,6 @@ const getCharacters = async (page: number[], filters?: string): Promise<RickAndM
     return getFinalData(results);
 }
 
-
 const getFinalData = async (results: Data[]) : Promise<RickAndMortyPayload> => {
     let episodes: string[] = [];
     results.forEach((el: Data) => {

@@ -11,13 +11,10 @@
 
 .App-header {
   background-color: #282c34;
-  display: flex;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  justify-content: space-between;
 }
-main {background-color: #282c34;}
+main {background-color: #282c34;padding: 0 10px;}
 
 .App-link {
   color: #61dafb;
@@ -30,5 +27,41 @@ main {background-color: #282c34;}
   left: 50%;
   font-size: 2rem;
 }
-.pagination > li {cursor: pointer;}
+.pagination > li {
+  cursor: pointer;
+  font-weight: bold;
+  padding: 0 2px;
+}
+.active {
+  position: relative;
+}
 
+.active:before {
+  content: '';
+  position: absolute;
+  bottom: 38px;
+  width: 100%;
+  background: #11B0C8;
+  height: 4px;
+  right: 1px;
+}
+
+a.favorites {
+  line-height: 26px;
+  height: 28px;
+  padding: 0 10px;
+  border: 1px solid #11B0C8;
+  position: relative;
+  top: 5px;
+}
+
+@media screen and (max-width: 450px) {
+  .charBox {
+    flex-direction: column;
+    height: auto;
+  }
+  .imgBox img {
+    max-width: 100%;
+    width: 100%;
+  }
+}
