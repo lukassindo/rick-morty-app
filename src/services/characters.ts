@@ -1,12 +1,12 @@
 import { Characters, Data, RickAndMortyPayload } from "../models/models";
 
 const getFavorites = async (urls: string[]): Promise<RickAndMortyPayload> => {
-    let results: Characters = [];
-    let allData = await Promise.all(urls.map(el =>{
+    const results: Characters = [];
+    const allData = await Promise.all(urls.map(el =>{
         return fetch(el)
         .then((response)=>response.json());
     }));
-    allData = allData.map((item) => {
+    allData.map((item) => {
         results.push(item);  
     });
     return getFinalData(results);
@@ -21,7 +21,7 @@ const getCharacters = async (page: number[], filters?: string): Promise<RickAndM
         url += `${page}`;
     }
     const response = await fetch(url);
-    let result = await response.json();
+    const result = await response.json();
     if(response.status !== 200) return { results: [], errorMessage: "Pick proper name"};
     if(filters) {
         results = result.results;
@@ -32,13 +32,13 @@ const getCharacters = async (page: number[], filters?: string): Promise<RickAndM
 }
 
 const getFinalData = async (results: Data[]) : Promise<RickAndMortyPayload> => {
-    let episodes: string[] = [];
+    const episodes: string[] = [];
     results.forEach((el: Data) => {
-        let ep: string = el.episode[0];
+        const ep: string = el.episode[0];
         episodes.push(ep);
     });
 
-    let episodesData  = await Promise.all(episodes.map(el => {
+    const episodesData  = await Promise.all(episodes.map(el => {
         return fetch(el)
         .then((response)=>response.json()) ;
     }));

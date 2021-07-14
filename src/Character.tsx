@@ -1,6 +1,7 @@
+import React from 'react';
 import { CardProps} from './models/models';
 
-const Character = ({data, index, addFavorite, removeFavorite, all} :CardProps) => {
+const Character = ({data, index, addFavorite, removeFavorite, all} :CardProps):JSX.Element => {
 
     return (
         <div className="charBox h-box bg-primary text-white flex rounded-lg overflow-hidden m-center" key={index}>
@@ -21,7 +22,7 @@ const Character = ({data, index, addFavorite, removeFavorite, all} :CardProps) =
                 {(all) ?
                     <button disabled={(data.disabled)} onClick= {() => addFavorite(data.name, data.url)} className="text-sm w-48 bg-transparent py-1 border-2 border-white disabled:bg-disabled disabled:cursor-disabled ">Add to Favorites</button>
                     :
-                    <button onClick= {(e) => removeFavorite(data.name)} className="text-sm w-48 bg-transparent py-1 border-2 border-white">Remove from Favorites</button>
+                    <button onClick= {() => removeFavorite(data.name)} className="text-sm w-48 bg-transparent py-1 border-2 border-white">Remove from Favorites</button>
                 }
             </div>
         </div>

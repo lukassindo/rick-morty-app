@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import React,{ useEffect, useMemo, useState } from 'react';
 import {getCharacters} from './services/characters';
 import Character from './Character';
 import './App.css';
@@ -10,7 +10,7 @@ import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faArrowLeft, faArrowRight );
 
-const AllCharacters = ({search, clear = false}: Searches) => {
+const AllCharacters = ({search, clear = false}: Searches):JSX.Element => {
     const [page, setPage] = useState<number[]>([1,2,3,4,5,6]);
     const [count, setCount] = useState<number>(0);
     const [characters, setCharacters] = useState<Characters>([]);
@@ -46,9 +46,9 @@ const AllCharacters = ({search, clear = false}: Searches) => {
     },[page, search]);
 
     useMemo(() => {
-      let urls: string[] = Object.values(localStorage);
+      const urls: string[] = Object.values(localStorage);
         characters.forEach((el, index) => {
-            let match = urls.find(item=> item === el.url);
+            const match = urls.find(item=> item === el.url);
             if (match !== undefined) characters[index].disabled = true;
         })
         setFirstPage(true)
@@ -56,7 +56,7 @@ const AllCharacters = ({search, clear = false}: Searches) => {
 
     const prevPage = () => {
         if (JSON.stringify(page) !== JSON.stringify([1,2,3,4,5,6])) {
-          let newPage: number[] = [];
+          const newPage: number[] = [];
           page.forEach(el => {
             newPage.push(el-6);
           });
@@ -68,7 +68,7 @@ const AllCharacters = ({search, clear = false}: Searches) => {
       if(page.find(el => el === count)) {
         return;
       } else {
-        let newPage: number[] = [];
+        const newPage: number[] = [];
         page.forEach(el => {
           newPage.push(el+6);
         });
@@ -85,7 +85,7 @@ const AllCharacters = ({search, clear = false}: Searches) => {
         setAdded(!added);
     }
 
-    const removeFavorites = (name: string) => {}
+    const removeFavorites = (name: string) => {return;}
 
     const loading = (<p className="loading text-white font-extrabold animate-pulse">Loading...</p>);
     

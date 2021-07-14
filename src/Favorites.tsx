@@ -1,17 +1,17 @@
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {getFavorites} from './services/characters';
 import { Characters } from './models/models';
 import Character from './Character';
 
-const Favorites = () => {
+const Favorites = ():JSX.Element => {
     const [characters, setCharacters] = useState<Characters>();
-    const [removed, setRemoved] = useState<Boolean>(false);
+    const [removed, setRemoved] = useState<boolean>(false);
     
     useEffect(() => {
-        let values: string[] = Object.values(localStorage);
+        const values: string[] = Object.values(localStorage);
         async function getData() { 
-            let data = await getFavorites(values);
-            let results = data.results;
+            const data = await getFavorites(values);
+            const results = data.results;
             setCharacters(results);
         }
         getData();
@@ -22,7 +22,7 @@ const Favorites = () => {
         (removed) ? setRemoved(false) : setRemoved(true);
     }
     
-    const AddFavorite = (name: string, url: string) => {} 
+    const AddFavorite = (name: string, url: string) => {return;} 
 
     return (
         <div className="favorites lg:grid-cols-2 xl:grid-cols-3 container mx-auto px-4 grid gap-4">

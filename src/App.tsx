@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React,{ useState } from 'react';
 import logo from './img/logo.png';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
@@ -11,7 +11,7 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faStar);
 
-const App = () => {
+const App = ():JSX.Element => {
   const [search, setSearch] = useState<string>('');
   const [clear, setClear] = useState<boolean>(false)
   

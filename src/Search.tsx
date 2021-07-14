@@ -6,7 +6,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faSearch);
 
-const Search = ({getData}: SearchProps ) => {
+const Search = ({getData}: SearchProps ):JSX.Element => {
     
     const [searchData, setSearch] = useState<string>('');
 

@@ -1,20 +1,20 @@
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { PaginationComponent} from './models/models';
 
 
-const Pagination = ({page, count, goToPage}: PaginationComponent) => {
+const Pagination = ({page, count, goToPage}: PaginationComponent):JSX.Element => {
     const [pagesArray, setPages] = useState<number[][]>([[]]);
     
     useEffect(() => {
         const numberPages = Math.ceil(count/6);
         if(numberPages > 0) {
-            let numArrays: number[][] = [[1,2,3,4,5,6]];
+            const numArrays: number[][] = [[1,2,3,4,5,6]];
             for(let i = 1; i < numberPages; i++) {
-                let sum: number[] = [];
-               numArrays[numArrays.length - 1].forEach(num=> {
-                   sum.push(num+6)
-               });
-               numArrays.push(sum);
+                const sum: number[] = [];
+                numArrays[numArrays.length - 1].forEach(num=> {
+                    sum.push(num+6)
+                });
+                numArrays.push(sum);
             }   
             setPages(numArrays)
         }
