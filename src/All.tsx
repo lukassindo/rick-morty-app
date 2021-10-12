@@ -19,6 +19,7 @@ const AllCharacters = ({search, clear = false}: Searches):JSX.Element => {
     const [error, setError] = useState<string>('');
 
     useEffect(()=> {
+        console.log('count - useEff')
         const Count =  async() => {
           const data = await fetch("https://rickandmortyapi.com/api/character");
           const result = await data.json();
@@ -29,11 +30,14 @@ const AllCharacters = ({search, clear = false}: Searches):JSX.Element => {
     },[]);
 
     useMemo(() => {
-      if(firstPage)
-      setPage([1,2,3,4,5,6])
+      if(firstPage) {
+        console.log('clear - useMemo')
+        setPage([1,2,3,4,5,6])
+      }
     },[clear]);
 
     useEffect(() => {
+      console.log('characters - useEff')
       const getChar = async() => {
         const data = await getCharacters(page, search);
         if(data.errorMessage)  {
@@ -46,6 +50,7 @@ const AllCharacters = ({search, clear = false}: Searches):JSX.Element => {
     },[page, search]);
 
     useMemo(() => {
+      console.log('disableFavs - useMemo')
       const urls: string[] = Object.values(localStorage);
         characters.forEach((el, index) => {
             const match = urls.find(item=> item === el.url);

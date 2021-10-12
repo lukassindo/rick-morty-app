@@ -19,7 +19,7 @@ const Pagination = ({page, count, goToPage}: PaginationComponent):JSX.Element =>
             setPages(numArrays)
         }
     },[])  
-   
+
     return (
         <>
          {(pagesArray.length > 1) &&
