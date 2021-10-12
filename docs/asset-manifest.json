@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/static/css/main.52a9e2d3.chunk.css",
-    "main.js": "/static/js/main.099115f8.chunk.js",
-    "main.js.map": "/static/js/main.099115f8.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.eecee0b1.js",
-    "runtime-main.js.map": "/static/js/runtime-main.eecee0b1.js.map",
-    "static/js/2.5264099e.chunk.js": "/static/js/2.5264099e.chunk.js",
-    "static/js/2.5264099e.chunk.js.map": "/static/js/2.5264099e.chunk.js.map",
-    "static/js/3.986f00ee.chunk.js": "/static/js/3.986f00ee.chunk.js",
-    "static/js/3.986f00ee.chunk.js.map": "/static/js/3.986f00ee.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.52a9e2d3.chunk.css.map": "/static/css/main.52a9e2d3.chunk.css.map",
-    "static/js/2.5264099e.chunk.js.LICENSE.txt": "/static/js/2.5264099e.chunk.js.LICENSE.txt"
+    "main.css": "/rick-morty-app/static/css/main.52a9e2d3.chunk.css",
+    "main.js": "/rick-morty-app/static/js/main.099115f8.chunk.js",
+    "main.js.map": "/rick-morty-app/static/js/main.099115f8.chunk.js.map",
+    "runtime-main.js": "/rick-morty-app/static/js/runtime-main.5c5c326c.js",
+    "runtime-main.js.map": "/rick-morty-app/static/js/runtime-main.5c5c326c.js.map",
+    "static/js/2.5264099e.chunk.js": "/rick-morty-app/static/js/2.5264099e.chunk.js",
+    "static/js/2.5264099e.chunk.js.map": "/rick-morty-app/static/js/2.5264099e.chunk.js.map",
+    "static/js/3.986f00ee.chunk.js": "/rick-morty-app/static/js/3.986f00ee.chunk.js",
+    "static/js/3.986f00ee.chunk.js.map": "/rick-morty-app/static/js/3.986f00ee.chunk.js.map",
+    "index.html": "/rick-morty-app/index.html",
+    "static/css/main.52a9e2d3.chunk.css.map": "/rick-morty-app/static/css/main.52a9e2d3.chunk.css.map",
+    "static/js/2.5264099e.chunk.js.LICENSE.txt": "/rick-morty-app/static/js/2.5264099e.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.eecee0b1.js",
+    "static/js/runtime-main.5c5c326c.js",
     "static/js/2.5264099e.chunk.js",
     "static/css/main.52a9e2d3.chunk.css",
     "static/js/main.099115f8.chunk.js"
