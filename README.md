@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Simple APP for Your favorite Ricky & Morty characters. Visit at https://lukassindo.github.io/rick-morty-app/
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
