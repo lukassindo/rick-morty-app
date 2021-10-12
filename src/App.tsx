@@ -28,7 +28,7 @@ const App = ():JSX.Element => {
     <div className="App font-primary">
       <Router>
         <header className="App-header flex flex-col md:flex-row justify-between items-center container mx-auto px-4 py-10">
-          <Link to="/" onClick={()=> clearData('')} className="mb-2">
+          <Link to="/rick-morty-app" onClick={()=> clearData('')} className="mb-2">
             <img src={logo}  className="App-logo" alt="Link to main page of app" />
           </Link>
           <Search getData={getData}/>
@@ -39,14 +39,14 @@ const App = ():JSX.Element => {
         </header>
         <main>
           <Switch>
-            <Route exact path="/">
+            <Route exact path="/rick-morty-app">
               <AllCharacters search ={search} clear={clear}/>
             </Route>
             <Route path="/favorites">
               <Favorites/>  
             </Route>
           </Switch>
-          {search && <Redirect to="/" />}
+          {search && <Redirect to="/rick-morty-app" />}
         </main>
       </Router>
     </div>

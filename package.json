@@ -1,7 +1,7 @@
 {
   "name": "rick-morty-app",
   "version": "0.1.0",
-  "homepage": "https://lukassindo.github.io/",
+  "homepage": "https://lukassindo.github.io/rick-morty-app/",
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.2.0",
